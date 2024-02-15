@@ -1,11 +1,29 @@
 {
-  "posts": [
+  "players": [
     {
       "id": 1,
-      "title": "hello"
+      "name": "sebas",
+      "deck": [15, 58, 45, 1, 21]
+    },
+    {
+      "id": 2,
+      "name": "santiago",
+      "deck": [14, 85, 64, 11, 12]
+    },
+    {
+      "id": 3,
+      "name": "lucas",
+      "deck": [7, 29, 36, 42, 53]
+    },
+    {
+      "id": 4,
+      "name": "maria",
+      "deck": [3, 16, 27, 39, 47]
+    },
+    {
+      "id": 5,
+      "name": "ana",
+      "deck": [9, 18, 25, 33, 60]
     }
-  ],
-  "profile": {
-    "name": "typicode"
-  }
+  ]
 }
