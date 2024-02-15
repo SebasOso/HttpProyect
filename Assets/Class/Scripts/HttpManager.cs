@@ -5,6 +5,7 @@ using UnityEngine.Networking;
 
 public class HttpManager : MonoBehaviour
 {
+    [SerializeField] private string fakeApiUrl = "https://my-json-server.typicode.com/SebasOso/HttpProyect";
     [SerializeField] private string url;
     private void Start()
     {
@@ -17,7 +18,7 @@ public class HttpManager : MonoBehaviour
     }
     private IEnumerator GetCharacters()
     {
-        UnityWebRequest request = UnityWebRequest.Get("https://pokeapi.co/api/v2/pokemon");
+        UnityWebRequest request = UnityWebRequest.Get(fakeApiUrl + "/players");
         yield return request.SendWebRequest();
         if(request.result == UnityWebRequest.Result.ConnectionError)
         {
@@ -28,12 +29,20 @@ public class HttpManager : MonoBehaviour
         {
             if(request.responseCode == 200)
             {
-                Debug.Log("Connceted!");
+                Debug.Log("Connected!");
                 Debug.Log(request.downloadHandler.text);
-                JsonData data = JsonUtility.FromJson<JsonData>(request.downloadHandler.text);
-                foreach (CharacterData character in data.results)
+
+                string json = "{ \"players\" :"+request.downloadHandler.text + "}";
+
+                JsonData data = JsonUtility.FromJson<JsonData>(json);
+                foreach (CharacterData player in data.players)
                 {
-                    Debug.Log("name: " + character.name);
+                    Debug.Log("name: " + player.name);
+                    Debug.Log("id: " + player.id);
+                    foreach (var card in player.deck)
+                    {
+                        Debug.Log("Card: " + card);
+                    }
                 }
             }
         }
@@ -42,12 +51,12 @@ public class HttpManager : MonoBehaviour
 [System.Serializable]
 public class JsonData
 {
-    public CharacterData[] results;
+    public CharacterData[] players;
 }
 [System.Serializable]
 public class CharacterData
 {
+    public int id;
     public string name;
-    public string url;
-    public string image;
+    public int[] deck;
 }
