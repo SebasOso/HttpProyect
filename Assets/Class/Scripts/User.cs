@@ -7,29 +7,36 @@ using UnityEngine.UI;
 public class User : MonoBehaviour
 {
     [SerializeField] List<RawImage> cards = new List<RawImage>();
+    [SerializeField] List<TextMeshProUGUI> cardsNames = new List<TextMeshProUGUI>();
     [SerializeField] List<Texture> textures = new List<Texture>();
+    [SerializeField] List<string> names = new List<string>();
     [SerializeField] TextMeshProUGUI userName;
-    void Start()
-    {
-        
-    }
-    void Update()
-    {
-        
-    }
     public void SetName(string name)
     {
         userName.text = name;
     }
-    public void SetTextures(List<Texture> textures)
+    public void SetCardImages(List<Texture> textures)
     {
         this.textures = textures;
+        SetImages();
     }
-    public void SetCards()
+    private void SetImages()
     {
         for (int i = 0; i < 5; i++)
         {
             cards[i].texture = textures[i];
+        }
+    }
+    public void SetCardNames(List<string> names)
+    {
+        this.names = names;
+        SetCardsNames();
+    }
+    private void SetCardsNames()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            cardsNames[i].text = names[i];
         }
     }
 }
